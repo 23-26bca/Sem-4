@@ -1,0 +1,44 @@
+<html>
+<body>
+<form>
+<?php
+ $con=mysqli_connect("localhost","root","","demo");
+ if(!$con)
+ {
+   echo "could not connect";
+ }
+echo $_REQUEST['r'];
+ $result=mysqli_query($con,"select * from employee where emp_no='".$_REQUEST['r']."'");
+
+ while($row=mysqli_fetch_array($result))
+ {
+?>
+ emp_no <input type="Text" name="t1" value="<?php echo $row['emp_no'];?>"></br>
+ name <input type="Text" name="t2" value="<?php echo $row['ename'];?>"></br>
+ designation <input type="Text" name="t3" value="<?php echo $row['des'];?>"></br>
+ salary <input type="Text" name="t4" value="<?php echo $row['sal'] ;?>"></br>
+ <input type="submit" name="s1" value="update"/>
+<?php
+}
+mysqli_close($con);
+if(isset($_REQUEST['s1']))
+{
+ $con=mysqli_connect("localhost","root","","demo");
+ if(!$con)
+ {
+   echo"couldnot";
+ }
+ 
+$s="update employee set ename='".$_REQUEST['t2']."',des='".$_REQUEST['t3']."',sal=".$_REQUEST['t4']." where emp_no='".$_REQUEST['t1']."'";
+	echo $s;
+$re=mysqli_query($con,$s);
+    mysqli_close($con);
+	header("Location:20.php");
+   }
+
+ 
+?>
+</form>
+</body>
+</html>
+
