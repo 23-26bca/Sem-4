@@ -1,0 +1,27 @@
+<html>
+<body>
+<form >
+User Name<input type="text" name="num">
+Password<input type="text" name="psw">
+<input type="submit" name="submit">
+</form>
+<?php
+$num=$_REQUEST['num'];
+$psw=$_REQUEST['psw'];
+
+if(isset($_REQUEST['submit'])) 
+{
+$con=mysqli_connect("localhost","root","","stud");
+if($con)
+{  
+$str="select * from login where username='$num' and psw='$psw.'";
+echo $str;
+$res=mysqli_query($con,$str);
+$row=mysqli_fetch_array($res);
+echo "Welcome :".$row[0]."<br>";
+mysqli_close($con);
+}
+}
+?>
+</body>
+</html>
