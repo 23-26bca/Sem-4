@@ -1,0 +1,52 @@
+<html>
+<body>
+<form>
+ enter emp number <input type="text" name="t1"/></br>
+ enter emp name<input type="text" name="t2"/></br>
+ enter emp designation<input type="text" name="t3"/></br>
+ enter emp salary<input type="text" name="t4"/></br>
+ <input type="submit" name="s1"/>
+<?php
+if(isset($_REQUEST['s1']))
+{
+$con=mysqli_connect("localhost","root","","demo");
+if(!$con)
+{
+	echo "could not connect";
+}
+$no=$_REQUEST['t1'];
+$name=$_REQUEST['t2'];
+$des=$_REQUEST['t3'];
+$salary=$_REQUEST['t4'];
+
+mysqli_query($con,"insert into employee(emp_no,ename,des,sal)values($no,'$name','$des',$salary)");
+echo "inserted";
+$result=mysqli_query($con,"select * from employee");
+?>
+<table border="1">
+<tr>
+<td>emp num</td>
+<td>emp name</td>
+<td>Designation</td>
+<td>Salary</td>
+</tr>
+<?php
+while($row=mysqli_fetch_array($result)) 
+{
+?>
+<tr>
+<td><?php echo $row['emp_no'];?></td>
+<td><?php echo $row['ename'];?></td>
+<td><?php echo $row['des'];?></td>
+<td><?php echo $row['sal'];?></td></tr>
+<?php
+}
+?>
+</table>
+<?php
+mysqli_close($con); 
+}
+?>
+</form>
+</body>
+</html>
