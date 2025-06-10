@@ -1,0 +1,24 @@
+<html>
+<body>
+<form>
+<?php
+ $con=mysqli_connect("localhost","root","","demo");
+ if(!$con)
+ {
+   echo "could not connect";
+ }
+
+
+ 
+$s="delete from employee where emp_no='".$_REQUEST['r']."'";
+	echo $s;
+mysqli_query($con,$s);
+    mysqli_close($con);
+	header("Location:20.php");
+   
+ 
+?>
+</form>
+</body>
+</html>
+
