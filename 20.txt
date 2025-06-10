@@ -1,0 +1,41 @@
+<html>
+<body>
+<form>
+<?php
+$con=mysqli_connect("localhost","root","","demo");
+if(!$con)
+{
+	echo "could not connect";
+}
+
+$result=mysqli_query($con,"select * from employee");
+?>
+<table border="1">
+<tr>
+<td>emp_no</td>
+<td>ename</td>
+<td>des</td>
+<td>sal</td>
+</tr>
+<?php
+while($row=mysqli_fetch_array($result))
+{
+?>
+<tr>
+<td><?php echo $row['emp_no'];?></td>
+<td><?php echo $row['ename'];?></td>
+<td><?php echo $row['des'];?></td>
+<td><?php echo $row['sal'];?></td>
+<td><a href="update.php?r=<?php echo $row['emp_no']; ?>">edit</a></td>
+<td><a href="delete.php?r=<?php echo $row['emp_no']; ?>">Delete</a></td>
+</tr>
+<?php
+}
+?>
+</table>
+<?php
+mysqli_close($con);
+?>
+</form>
+</body>
+</html>
